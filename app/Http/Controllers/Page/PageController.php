@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Page;
 
 use App\Http\Controllers\Controller as BaseController;
 use App\Http\Controllers\Helper\HelperController as pr;
+use Illuminate\Http\Request;
 
 class PageController extends BaseController {
 
@@ -16,7 +17,7 @@ class PageController extends BaseController {
         parent::__construct();
     }
 
-    public function index() {
+    public function index(Request $request) {
         // Attach the external URL to the view
         self::AddData('remoteUrl', 'http://pods.formetocoupon.com/6275c1397c7aaafd8ae8ca639276261d.json');
         

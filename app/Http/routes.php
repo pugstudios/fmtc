@@ -15,4 +15,4 @@
 Route::get('/', 'Page\PageController@index');
 
 // Remote URL Submit
-Route::post('/fetch-json', 'JSONParser\JSONParserController@fetchJSON');
+Route::post('/create-coupon', 'Coupon\CouponController@createCoupon');
