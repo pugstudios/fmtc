@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Setup the index page
+Route::get('/', 'Page\PageController@index');
+
+// Remote URL Submit
+Route::post('/fetch-json', 'JSONParser\JSONParserController@fetchJSON');
