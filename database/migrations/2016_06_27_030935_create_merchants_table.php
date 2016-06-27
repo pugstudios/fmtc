@@ -13,7 +13,7 @@ class CreateMerchantsTable extends Migration {
     public function up() {
         Schema::create('merchants', function (Blueprint $table) {
             $table -> increments('id') -> unsigned();
-            $table -> increments('master_merchant_id') -> unsigned();
+            $table -> integer('master_merchant_id') -> unsigned();
             $table -> string('name');
             $table -> timestamps();
 
