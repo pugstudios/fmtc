@@ -12,8 +12,6 @@
         <p>Merchant: {{ $couponJSON -> aDeals[0][0] -> cMerchant }}</p>
 
         <input type="button" class="print" onClick="window.print()" value="Print Voucher"/>
-
-
-
+ 
     </center>
 </div>
