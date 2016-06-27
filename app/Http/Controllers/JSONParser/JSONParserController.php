@@ -28,8 +28,8 @@ class JSONParserController extends BaseController {
         ]);
 
         $content = self::RemoteJSONReader($request -> get('remoteUrl'));
-        pr::show($content);
-        die();
+        
+        
     }
 
     /**
