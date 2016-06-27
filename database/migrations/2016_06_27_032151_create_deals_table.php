@@ -50,7 +50,7 @@ class CreateDealsTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::drop('merchants');
+        Schema::drop('deals');
     }
 
 }
