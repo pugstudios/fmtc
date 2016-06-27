@@ -26,11 +26,11 @@ class CreateDealsTable extends Migration {
             $table -> string('skim_links_url') -> nullable() -> default(NULL);
             $table -> string('fmtc_url') -> nullable() -> default(NULL);
             $table -> text('pixel_html') -> nullable() -> default(NULL);
-            $table -> decimal('sale_price', 2, 10) -> default(0.00);
-            $table -> decimal('was_price', 2, 10) -> default(0.00);
-            $table -> decimal('discount', 2, 10) -> default(0.00);
-            $table -> decimal('threshold', 2, 10) -> default(0.00);
-            $table -> decimal('rating', 3, 10) -> default(0.00);
+            $table -> decimal('sale_price', 10, 2) -> default(0.00);
+            $table -> decimal('was_price', 10, 2) -> default(0.00);
+            $table -> decimal('discount', 10, 2) -> default(0.00);
+            $table -> decimal('threshold', 10, 2) -> default(0.00);
+            $table -> decimal('rating', 10, 3) -> default(0.00);
             $table -> boolean('starred') -> default(0);
             $table -> string('logo_88x31');
             $table -> string('logo_120x60');
