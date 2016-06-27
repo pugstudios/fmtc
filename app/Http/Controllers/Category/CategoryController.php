@@ -45,6 +45,14 @@ class CategoryController extends BaseController {
         return $category -> id;
     }
     
+    /**
+     * AddLinkDealCategory
+     * Creates a link between a deal and a category
+     * 
+     * @param integer $dealId
+     * @param integer $categoryId
+     * @return integer
+     */
     public static function AddLinkDealCategory($dealId, $categoryId) {
         // Does the link exist in the DB already?
         if(!$link = LinkDealCategory::where('deal_id', $dealId) -> where('category_id', $categoryId) -> first()) {

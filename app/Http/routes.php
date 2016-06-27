@@ -15,4 +15,4 @@
 Route::get('/', 'Page\PageController@index');
 
 // Remote URL Submit
-Route::post('/create-coupon', 'Coupon\CouponController@createCoupon');
+Route::post('/create-coupon', 'Coupon\CouponController@fetchCoupon');

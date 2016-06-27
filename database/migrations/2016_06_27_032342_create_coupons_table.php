@@ -14,6 +14,7 @@ class CreateCouponsTable extends Migration {
         Schema::create('coupons', function (Blueprint $table) {
             $table -> increments('id') -> unsigned();
             $table -> integer('pod_id');
+            $table -> integer('deal_id') -> unsigned();
             $table -> string('title');
             $table -> string('md5');
             $table -> integer('width') -> default(0);
@@ -51,6 +52,8 @@ class CreateCouponsTable extends Migration {
             $table -> integer('opm_id') -> default(0);
             $table -> string('sub_domain') -> nullable() -> default(NULL);
             $table -> timestamps();
+            
+            $table -> foreign('deal_id') -> references('id') -> on('deals') -> onDelete('cascade');
         });
     }
 
