@@ -13,6 +13,7 @@ use App\Http\Controllers\Type\TypeController;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Coupon;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 
 class CouponController extends BaseController {
 
@@ -28,22 +29,25 @@ class CouponController extends BaseController {
     public function fetchCoupon(Request $request) {
         // Fetch the JSON content
         $content = JSONParserController::RemoteJSONReader($request -> get('remoteUrl'));
-        
+
         // TODO: Add validation in case the following param is not present
         // Pull coupon from the cache if it's available
-        if(!$coupon = Cache::get('coupon_' . $content -> rsPod -> nPodID)) {
+        if (!$coupon = Cache::get('coupon_' . $content -> rsPod -> nPodID)) {
             Log::info('created');
-            $coupon = self::CreateCoupon($content);
-            
+            self::CreateCoupon($content);
+
             // Store the coupon in the cache (10 minutes)
-            Cache::put('coupon_' . $content -> rsPod -> nPodID, $coupon, 10);
+            Cache::put('coupon_' . $content -> rsPod -> nPodID, $content, 10);
         } else {
             Log::info('pulled from cache');
         }
-        
-        return $coupon;
+
+        // Add content to the session
+        $request -> session() -> put('couponJSON', $content);
+
+        return Redirect::back();
     }
-    
+
     /**
      * CreateCoupon
      * Creates a new coupon in the system or returns a coupon if it exists
@@ -55,33 +59,32 @@ class CouponController extends BaseController {
         // Capture coupon & deal data
         $couponData = $content -> rsPod;
         $dealsData = $content -> aDeals[0]; // Hack here since there seems to be one extra lvl of unknown data
-        
         // Data Storage
-        foreach($dealsData as $dealData) {
+        foreach ($dealsData as $dealData) {
             // TODO: Add validation in case the following three params are not present
             $merchantId = MerchantController::CreateMerchant($dealData -> cMerchant, $dealData -> nMerchantID, $dealData -> nMasterMerchantID);
-        
+
             // Create the deal
             $deal = DealController::CreateDeal($dealData, $merchantId);
-            
+
             // TODO: Add validation in case the following param is not present
-            foreach($dealData -> aCategoriesV2 as $categoryData) {
+            foreach ($dealData -> aCategoriesV2 as $categoryData) {
                 // TODO: Add validation in case the following four params are not present
                 $categoryId = CategoryController::CreateCategory($categoryData -> cName, $categoryData -> nCategoryID, $categoryData -> nParentID, $categoryData -> bRestricted);
                 CategoryController::AddLinkDealCategory($deal -> id, $categoryId);
             }
-            
+
             // TODO: Add validation in case the following param is not present
-            foreach($dealData -> aTypes as $typeData) {
+            foreach ($dealData -> aTypes as $typeData) {
                 // TODO: Add validation in case the following param is not present
                 $typeId = TypeController::CreateType($typeData);
                 TypeController::AddLinkDealType($deal -> id, $typeId);
             }
         }
-        
+
         // Does the following coupon exist in the DB already?
-        if(!$coupon = Coupon::where('pod_id', $couponData -> nPodID) -> first()) {
-                        
+        if (!$coupon = Coupon::where('pod_id', $couponData -> nPodID) -> first()) {
+
             // Create the coupon
             $coupon = new Coupon();
             $coupon -> pod_id = isset($couponData -> nPodID) ? $couponData -> nPodID : NULL;
@@ -123,8 +126,8 @@ class CouponController extends BaseController {
             $coupon -> sub_domain = isset($couponData -> cSubdomain) ? $couponData -> cSubdomain : NULL;
             $coupon -> save();
         }
-        
-        return $coupon;
+
+        return $content;
     }
 
 }

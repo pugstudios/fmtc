@@ -8,6 +8,8 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('css/jasny-bootstrap.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
+	<link href="http://fonts.googleapis.com/css?family=Inconsolata&amp;v1" rel="stylesheet" type="text/css" />
+	<link href='http://fonts.googleapis.com/css?family=Candal&amp;v1' rel='stylesheet' type='text/css' />
 
     </head>
     <body>

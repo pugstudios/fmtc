@@ -27,7 +27,7 @@
 <hr/>
 
 @if(isset($couponJSON))
-{{ print_r($couponJSON, TRUE) }}
+@include('pages.coupon')
 @endif
 
 @endsection
