@@ -11,7 +11,7 @@ class CreateTypesTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('types', function (Blueprint $table) {
             $table -> increments('id') -> unsigned();
             $table -> string('name');
             $table -> timestamps();
@@ -24,7 +24,7 @@ class CreateTypesTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::drop('categories');
+        Schema::drop('types');
     }
 
 }
