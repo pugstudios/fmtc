@@ -20,7 +20,7 @@ class MerchantController extends BaseController {
 
     public static function CreateMerchant($name, $id, $masterId) {
         // Does the following merchant exist in the DB already?
-        if(!Merchant::where('name', $name) -> exists()) {
+        if(!$merchant = Merchant::where('id', $id) -> first()) {
             // Create the merchant
             $merchant = new Merchant();
             $merchant -> name = $name;
@@ -28,6 +28,8 @@ class MerchantController extends BaseController {
             $merchant -> master_merchant_id = $masterId;
             $merchant -> save();
         }
+        
+        return $merchant -> id;
     }
 
 }

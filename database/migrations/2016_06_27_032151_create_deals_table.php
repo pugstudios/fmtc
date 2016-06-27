@@ -13,8 +13,7 @@ class CreateDealsTable extends Migration {
     public function up() {
         Schema::create('deals', function (Blueprint $table) {
             $table -> increments('id') -> unsigned();
-            $table -> string('code');
-            $table -> string('name');
+            $table -> string('code')-> unique();
             $table -> string('network');
             $table -> integer('merchant_id') -> unsigned();
             $table -> string('label');
