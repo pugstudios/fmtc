@@ -38,8 +38,7 @@ class CreateDealsTable extends Migration {
             $table -> string('network_name');
             $table -> enum('status', array('active', 'disabled')) -> default('active');
             $table -> timestamps();
-            
-            $table -> foreign('merchant_id') -> references('id') -> on('merchants') -> onDelete('cascade');
+
         });
     }
 

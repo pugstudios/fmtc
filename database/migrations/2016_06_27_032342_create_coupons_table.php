@@ -52,8 +52,6 @@ class CreateCouponsTable extends Migration {
             $table -> integer('opm_id') -> default(0);
             $table -> string('sub_domain') -> nullable() -> default(NULL);
             $table -> timestamps();
-            
-            $table -> foreign('deal_id') -> references('id') -> on('deals') -> onDelete('cascade');
         });
     }
 

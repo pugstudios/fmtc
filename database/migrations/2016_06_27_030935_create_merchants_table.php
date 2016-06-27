@@ -16,8 +16,6 @@ class CreateMerchantsTable extends Migration {
             $table -> integer('master_merchant_id') -> unsigned();
             $table -> string('name');
             $table -> timestamps();
-
-            $table -> foreign('master_merchant_id') -> references('id') -> on('merchants') -> onDelete('cascade');
         });
     }
 

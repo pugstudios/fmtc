@@ -16,9 +16,6 @@ class CreateLinkDealsTypesTable extends Migration {
             $table -> integer('deal_id') -> unsigned();
             $table -> integer('type_id') -> unsigned();
             $table -> timestamps();
-
-            $table -> foreign('deal_id') -> references('id') -> on('deals') -> onDelete('cascade');
-            $table -> foreign('type_id') -> references('id') -> on('types') -> onDelete('cascade');
         });
     }
 
